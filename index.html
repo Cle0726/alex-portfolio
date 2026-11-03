@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Chen · 独立开发者 & 界面设计师作品集</title>
+  <meta name="description" content="专注于实用工具、现代 Web 体验与极简交互设计的个人作品集。">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --card-bg: #1c2128;
+      --border: #30363d;
+      --text: #f0f6fc;
+      --text-muted: #8b949e;
+      --accent: #2ea043;
+      --accent-hover: #3fb950;
+      --tag-bg: #21262d;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 20px 80px;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* 顶部导航 */
+    header {
+      padding: 32px 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .avatar-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2ea043, #1f6feb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .brand-info h1 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--text);
+      background: var(--tag-bg);
+    }
+
+    /* 英雄区：自我介绍 */
+    .hero {
+      margin-bottom: 56px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(46, 160, 67, 0.15);
+      color: var(--accent-hover);
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .hero-tag::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-hover);
+    }
+
+    .hero h2 {
+      font-size: 38px;
+      line-height: 1.25;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      min-height: 42px;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      background: var(--tag-bg);
+      border-color: var(--text-muted);
+    }
+
+    /* 分类过滤器 */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 6px 14px;
+      font-size: 13px;
+      border-radius: 20px;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .filter-btn:hover {
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+      font-weight: 600;
+    }
+
+    /* 作品网格 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #58a6ff;
+    }
+
+    .card-preview {
+      width: 100%;
+      height: 180px;
+      background: #21262d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-preview svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--tag-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: #58a6ff;
+      font-weight: 500;
+    }
+
+    /* 技能与经验 */
+    .skills-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 64px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .skill-col h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .skill-list {
+      list-style: none;
+    }
+
+    .skill-list li {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-list li::before {
+      content: "•";
+      color: var(--accent);
+      font-size: 16px;
+    }
+
+    /* 关于我与联系 */
+    .about-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 64px;
+    }
+
+    .about-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .about-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .about-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px 14px;
+      background: var(--tag-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      transition: border-color 0.15s ease;
+    }
+
+    .contact-item:hover {
+      border-color: #58a6ff;
+    }
+
+    /* 页脚与数据备份 */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .footer-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+      min-height: auto;
+    }
+
+    /* 模态框弹窗 */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      max-width: 640px;
+      width: 100%;
+      padding: 28px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(--text);
+    }
+
+    .modal-header h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .modal-meta {
+      font-size: 13px;
+      color: var(--accent-hover);
+      margin-bottom: 16px;
+    }
+
+    .modal-body p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .modal-highlights {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .modal-highlights h5 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .modal-highlights ul {
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .modal-highlights li {
+      margin-bottom: 4px;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+      body {
+        padding: 0 16px 60px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .hero h2 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .about-section {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 头部导航 -->
+    <header>
+      <a href="#" class="brand">
+        <div class="avatar-badge">A</div>
+        <div class="brand-info">
+          <h1>Alex Chen</h1>
+          <p>Product Designer & Frontend Engineer</p>
+        </div>
+      </a>
+      <nav>
+        <a href="#projects" class="active">作品</a>
+        <a href="#skills">技能栈</a>
+        <a href="#about">关于我</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </header>
+
+    <!-- 主介绍区 -->
+    <section class="hero">
+      <div class="hero-tag">开放接案 & 交流中</div>
+      <h2>用克制而实用的设计，<br>打造真正解决问题的好产品。</h2>
+      <p>你好，我是 Alex。5 年数字化界面与全栈 Web 开发经验，关注清晰的信息层级、扎实的交互体验与经久耐看的极简美学。</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">浏览代表作品</a>
+        <a href="#contact" class="btn btn-outline">获取联系方式</a>
+      </div>
+    </section>
+
+    <!-- 作品展示列表 -->
+    <section id="projects">
+      <div class="section-header">
+        <h3 class="section-title">精选作品集</h3>
+        <div class="filters" id="filter-container">
+          <button class="filter-btn active" data-filter="all">全部 (6)</button>
+          <button class="filter-btn" data-filter="web">Web 应用</button>
+          <button class="filter-btn" data-filter="tool">效率工具</button>
+          <button class="filter-btn" data-filter="design">界面设计</button>
+        </div>
+      </div>
+
+      <div class="grid" id="project-grid">
+        <!-- 卡片 1 -->
+        <div class="card" data-category="web" data-id="1">
+          <div class="card-preview">
+            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+              <rect width="360" height="180" fill="#161b22"/>
+              <rect x="20" y="24" width="320" height="132" rx="8" fill="#1c2128" stroke="#30363d"/>
+              <circle cx="40" cy="40" r="4" fill="#f85149"/>
+              <circle cx="52" cy="40" r="4" fill="#e3b341"/>
+              <circle cx="64" cy="40" r="4" fill="#2ea043"/>
+              <rect x="40" y="58" width="120" height="12" rx="3" fill="#30363d"/>
+              <rect x="40" y="78" width="260" height="8" rx="2" fill="#21262d"/>
+              <rect x="40" y="94" width="220" height="8" rx="2" fill="#21262d"/>
+              <rect x="40" y="118" width="80" height="20" rx="4" fill="#238636"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">TypeScript</span>
+              <span class="tag">Next.js</span>
+              <span class="tag">Web 应用</span>
+            </div>
+            <h4 class="card-title">FlowPulse 团队实时协同面板</h4>
+            <p class="card-desc">轻量级敏捷看板与里程碑追踪系统，支持毫秒级状态同步、无损离线编辑与看板图表导出。</p>
+            <div class="card-footer">
+              <span>查看项目详情</span>
+              <span>→</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 2 -->
+        <div class="card" data-category="tool" data-id="2">
+          <div class="card-preview">
+            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+              <rect width="360" height="180" fill="#131920"/>
+              <rect x="30" y="30" width="140" height="120" rx="8" fill="#1c2128" stroke="#30363d"/>
+              <rect x="190" y="30" width="140" height="120" rx="8" fill="#1c2128" stroke="#30363d"/>
+              <rect x="46" y="50" width="108" height="8" rx="2" fill="#58a6ff"/>
+              <rect x="46" y="68" width="80" height="6" rx="2" fill="#8b949e"/>
+              <rect x="206" y="50" width="108" height="8" rx="2" fill="#2ea043"/>
+              <rect x="206" y="68" width="90" height="6" rx="2" fill="#8b949e"/>
+              <path d="M170 90 L190 90" stroke="#58a6ff" stroke-width="2" stroke-dasharray="4"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Node.js</span>
+              <span class="tag">CLI</span>
+              <span class="tag">效率工具</span>
+            </div>
+            <h4 class="card-title">FastAsset 静态资源自动化压制工具</h4>
+            <p class="card-desc">面向前端构建流水线的资源优化引擎，一键转码 WebP/AVIF，节省 65% CDN 带宽开销。</p>
+            <div class="card-footer">
+              <span>查看项目详情</span>
+              <span>→</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 3 -->
+        <div class="card" data-category="design" data-id="3">
+          <div class="card-preview">
+            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+              <rect width="360" height="180" fill="#161b22"/>
+              <circle cx="100" cy="90" r="45" fill="none" stroke="#a371f7" stroke-width="12" stroke-dasharray="200" stroke-dashoffset="60"/>
+              <circle cx="100" cy="90" r="45" fill="none" stroke="#2ea043" stroke-width="12" stroke-dasharray="200" stroke-dashoffset="140"/>
+              <rect x="180" y="55" width="120" height="10" rx="3" fill="#f0f6fc"/>
+              <rect x="180" y="75" width="140" height="8" rx="2" fill="#8b949e"/>
+              <rect x="180" y="93" width="90" height="8" rx="2" fill="#8b949e"/>
+              <rect x="180" y="115" width="110" height="18" rx="4" fill="#21262d" stroke="#30363d"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Figma</span>
+              <span class="tag">Design System</span>
+              <span class="tag">界面设计</span>
+            </div>
+            <h4 class="card-title">Aether 极简设计资产规范库</h4>
+            <p class="card-desc">包含 48+ 常用组件、双色系无障碍高对比度调色盘与完整排版网格系统的 Figma 开源设计规范。</p>
+            <div class="card-footer">
+              <span>查看项目详情</span>
+              <span>→</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 4 -->
+        <div class="card" data-category="web" data-id="4">
+          <div class="card-preview">
+            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+              <rect width="360" height="180" fill="#0e141b"/>
+              <path d="M40 130 Q 110 60, 180 110 T 320 50" fill="none" stroke="#58a6ff" stroke-width="3"/>
+              <circle cx="180" cy="110" r="4" fill="#58a6ff"/>
+              <circle cx="320" cy="50" r="4" fill="#2ea043"/>
+              <line x1="40" y1="140" x2="320" y2="140" stroke="#30363d" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Vue 3</span>
+              <span class="tag">Canvas</span>
+              <span class="tag">Web 应用</span>
+            </div>
+            <h4 class="card-title">ApexAnalytics 数据可视化仪表盘</h4>
+            <p class="card-desc">高性能时间序列数据监控面板，支持单屏流畅渲染超 10 万点实时遥测指标曲线。</p>
+            <div class="card-footer">
+              <span>查看项目详情</span>
+              <span>→</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 5 -->
+        <div class="card" data-category="tool" data-id="5">
+          <div class="card-preview">
+            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+              <rect width="360" height="180" fill="#161b22"/>
+              <rect x="40" y="35" width="280" height="110" rx="8" fill="#1c2128" stroke="#30363d"/>
+              <text x="60" y="70" font-family="monospace" font-size="13" fill="#7ee787">$ note new --encrypt</text>
+              <text x="60" y="95" font-family="monospace" font-size="13" fill="#8b949e">> Vault unlocked: 12 notes</text>
+              <rect x="60" y="112" width="12" height="15" fill="#58a6ff"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Rust</span>
+              <span class="tag">Markdown</span>
+              <span class="tag">效率工具</span>
+            </div>
+            <h4 class="card-title">KeyMemo 本地端到端加密笔记</h4>
+            <p class="card-desc">纯本地存储的极客个人便签工具，采用 AES-256-GCM 加密算法，无云端泄露隐患。</p>
+            <div class="card-footer">
+              <span>查看项目详情</span>
+              <span>→</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 6 -->
+        <div class="card" data-category="design" data-id="6">
+          <div class="card-preview">
+            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+              <rect width="360" height="180" fill="#181e24"/>
+              <rect x="50" y="25" width="100" height="130" rx="12" fill="#1c2128" stroke="#30363d"/>
+              <rect x="180" y="25" width="130" height="130" rx="8" fill="#1c2128" stroke="#30363d"/>
+              <circle cx="100" cy="60" r="16" fill="#f0883e"/>
+              <rect x="65" y="90" width="70" height="8" rx="2" fill="#f0f6fc"/>
+              <rect x="195" y="45" width="100" height="8" rx="2" fill="#2ea043"/>
+              <rect x="195" y="65" width="80" height="6" rx="2" fill="#8b949e"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Mobile UI</span>
+              <span class="tag">Design</span>
+              <span class="tag">界面设计</span>
+            </div>
+            <h4 class="card-title">ZenHabit 习惯打卡移动端概念设计</h4>
+            <p class="card-desc">去除冗余成就系统的极简打卡交互方案，通过温柔的微交互鼓励用户培养专注的生活节奏。</p>
+            <div class="card-footer">
+              <span>查看项目详情</span>
+              <span>→</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技能栈与工作原则 -->
+    <section id="skills" class="skills-section">
+      <h3 class="section-title">核心技能与技术栈</h3>
+      <div class="skills-grid">
+        <div class="skill-col">
+          <h4>界面与前端架构</h4>
+          <ul class="skill-list">
+            <li>HTML5 / 现代 CSS 变量规范</li>
+            <li>TypeScript / JavaScript (ESNext)</li>
+            <li>React / Next.js / Vue 3</li>
+            <li>响应式栅格 & 无障碍规范 (WCAG)</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <h4>工程与后端能力</h4>
+          <ul class="skill-list">
+            <li>Node.js / Python 自动化脚本</li>
+            <li>RESTful API 设计与轻量后端</li>
+            <li>Git 协同管理与 CI/CD 构建流</li>
+            <li>离线优先设计与 LocalStorage 存储</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <h4>设计理念与工具</h4>
+          <ul class="skill-list">
+            <li>Figma 组件库与设计系统沉淀</li>
+            <li>信息架构提炼与大白话文案打磨</li>
+            <li>微交互动效节奏（150-250ms）</li>
+            <li>性能感知优化与首屏秒开体验</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于我与联系方式 -->
+    <section id="about" class="about-section">
+      <div class="about-card">
+        <h3>关于我</h3>
+        <p>我是一名相信「好工具应当无声润物」的独立开发者与界面设计师。在复杂工程与直觉体验之间，我更倾向于做减法：去掉无意义的装饰，保留最清晰的骨架与最顺手的功能。</p>
+        <p>业余时间喜欢摄影、骑行以及折腾开源小工具。随时欢迎探讨有趣的 Web 创意或项目合作！</p>
+      </div>
+
+      <div class="about-card" id="contact">
+        <h3>联系方式</h3>
+        <p>如果你有新奇的产品想法，或者想探讨合作，可以通过以下方式找到我：</p>
+        <div class="contact-links">
+          <a href="mailto:alex.chen.dev@example.com" class="contact-item">
+            <span>📧</span>
+            <span>alex.chen.dev@example.com</span>
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener" class="contact-item">
+            <span>🐙</span>
+            <span>GitHub / alex-chen</span>
+          </a>
+          <div class="contact-item">
+            <span>💬</span>
+            <span>微信：AlexChen_Dev</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 页脚与功能 -->
+    <footer>
+      <div>
+        <p>© 2026 Alex Chen · 纯手工打造，支持纯静态离线运行</p>
+      </div>
+      <div class="footer-actions">
+        <button class="btn btn-outline btn-sm" id="btn-export">导出数据备份 (.json)</button>
+        <button class="btn btn-outline btn-sm" id="btn-totop">回到顶部 ↑</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 详情弹窗模态框 -->
+  <div class="modal-backdrop" id="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close" aria-label="关闭">&times;</button>
+      <div class="modal-header">
+        <h3 id="modal-title">项目详情</h3>
+        <div class="modal-meta" id="modal-category">分类标签</div>
+      </div>
+      <div class="modal-body">
+        <p id="modal-desc">项目描述内容...</p>
+        <div class="modal-highlights">
+          <h5>设计与工程亮点</h5>
+          <ul id="modal-points">
+            <li>采用纯 CSS 变量实现暗色主题，减少不必要的外部重绘</li>
+            <li>移动端视口与无障碍对比度经严谨核对</li>
+          </ul>
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <button class="btn btn-primary btn-sm" id="modal-ok">了解并关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 交互逻辑 -->
+  <script>
+    // 项目数据定义
+    const projectsData = {
+      1: {
+        title: "FlowPulse 团队实时协同面板",
+        category: "Web 应用 · TypeScript / Next.js",
+        desc: "针对 5-20 人敏捷团队设计的精简协同工具。抛弃传统看板臃肿的配置流程，以任务流转卡片与即时评论为核心，首屏加载包体积仅 42KB。",
+        points: [
+          "基于 WebSocket 的毫秒级状态同步协议",
+          "支持拖拽排序与离线暂存（网络中断时不丢数据）",
+          "内置甘特图与周报一键导出为 Markdown / PNG"
+        ]
+      },
+      2: {
+        title: "FastAsset 静态资源自动化压制工具",
+        category: "效率工具 · Node.js / CLI",
+        desc: "开发 FastAsset 旨在解决团队每次发布版本时图片资源过大导致的加载慢问题。通过集成先进编码器，能够在保持视觉无损的前提下大幅缩减体积。",
+        points: [
+          "自动识别 PNG / JPEG 并并行编码为现代 WebP 与 AVIF",
+          "多进程流式写入，处理 100 张高清大图仅需 4.2 秒",
+          "提供清晰的压缩比率报告，已在 3 个开源项目中落地"
+        ]
+      },
+      3: {
+        title: "Aether 极简设计资产规范库",
+        category: "界面设计 · Figma / Design System",
+        desc: "一套注重阅读节奏与对比度规范的 Figma UI Kit。整套资产围绕「克制、清晰、一套到底」的原则构建，杜绝多余的渐变与框套框设计。",
+        points: [
+          "严格统一 8px / 12px 圆角阶梯与标准文字阶梯",
+          "经过 WCAG AA 级色彩对比度审查（对比度 ≥ 4.5:1）",
+          "附带全套线性 SVG 图标与响应式导航模板"
+        ]
+      },
+      4: {
+        title: "ApexAnalytics 数据可视化仪表盘",
+        category: "Web 应用 · Vue 3 / Canvas",
+        desc: "针对高频时序数据量身定制的轻量前端监控看板，重点攻克了大量 DOM 节点在低配设备上渲染卡顿的技术瓶颈。",
+        points: [
+          "自研双缓冲 Canvas 折线引擎，10 万点平滑缩放无掉帧",
+          "提供暗色/高对比度适配，暗光环境下护眼易读",
+          "支持指标预警阈值实时闪烁提醒与数据切片导出"
+        ]
+      },
+      5: {
+        title: "KeyMemo 本地端到端加密笔记",
+        category: "效率工具 · Rust / Markdown",
+        desc: "零云端依赖的个人敏感信息便签本。数据完全保存在本地磁盘并进行高强度对称加密，任何第三方服务均无法嗅探明文内容。",
+        points: [
+          "采用 AES-256-GCM 硬件加速加密方案",
+          "内存中敏感字段使用安全覆写技术，防止休眠后转储泄露",
+          "极简 CLI + Web 简易双模式自由切换"
+        ]
+      },
+      6: {
+        title: "ZenHabit 习惯打卡移动端概念设计",
+        category: "界面设计 · Mobile UI / Figma",
+        desc: "反向对抗「游戏化疲劳」的极简习惯养成应用。去除了排行榜与繁复勋章，回归纯粹的日历热力点与简单的心情标注。",
+        points: [
+          "专注单手微操作体验，所有触发点置于拇指舒适区",
+          "温润自然的微交互，无任何突兀弹窗打扰",
+          "深受小众极简主义爱好者的好评"
+        ]
+      }
+    };
+
+    // 过滤分类切换
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+
+        cards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 弹窗逻辑
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalCategory = document.getElementById('modal-category');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalPoints = document.getElementById('modal-points');
+    const modalClose = document.getElementById('modal-close');
+    const modalOk = document.getElementById('modal-ok');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const id = card.getAttribute('data-id');
+        const data = projectsData[id];
+        if (data) {
+          modalTitle.textContent = data.title;
+          modalCategory.textContent = data.category;
+          modalDesc.textContent = data.desc;
+          modalPoints.innerHTML = data.points.map(p => `<li>${p}</li>`).join('');
+          modal.style.display = 'flex';
+        }
+      });
+    });
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalOk.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // 回到顶部
+    document.getElementById('btn-totop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 导出备份（满足数据存本地、能导出备份规范）
+    document.getElementById('btn-export').addEventListener('click', () => {
+      const backupData = {
+        author: "Alex Chen",
+        version: "1.0.0",
+        exportedAt: new Date().toISOString(),
+        projects: projectsData
+      };
+      const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `alex-portfolio-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
