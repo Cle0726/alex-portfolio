@@ -3,20 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Chen · 独立开发者 & 界面设计师作品集</title>
-  <meta name="description" content="专注于实用工具、现代 Web 体验与极简交互设计的个人作品集。">
+  <title>晨墨 (Chen Mo) · 个人作品集与数字产品实践</title>
+  <meta name="description" content="数字产品设计师与全栈开发者，专注打造克制、高效且有温度的工具与交互体验。">
   <style>
+    /* 设计系统规范基准 */
     :root {
-      --bg: #0d1117;
-      --panel: #161b22;
-      --card-bg: #1c2128;
-      --border: #30363d;
-      --text: #f0f6fc;
-      --text-muted: #8b949e;
-      --accent: #2ea043;
-      --accent-hover: #3fb950;
-      --tag-bg: #21262d;
-      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      --bg: #0d0f12;
+      --bg-subtle: #14171d;
+      --card-bg: #171a22;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(255, 255, 255, 0.22);
+      --fg-primary: #f8fafc;
+      --fg-secondary: #cbd5e1;
+      --fg-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-warm: #fb923c;
+      --tag-bg: rgba(255, 255, 255, 0.06);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --max-width: 1040px;
+      --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * {
@@ -27,26 +36,31 @@
 
     body {
       background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-main);
-      line-height: 1.6;
+      color: var(--fg-primary);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      font-size: 15px;
       -webkit-font-smoothing: antialiased;
-      padding: 0 20px 80px;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow-x: hidden;
     }
 
     .container {
-      max-width: 1080px;
+      max-width: var(--max-width);
       margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
     }
 
     /* 顶部导航 */
     header {
-      padding: 32px 0 24px;
+      padding: 24px 0;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 48px;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--card-border);
     }
 
     .brand {
@@ -54,503 +68,578 @@
       align-items: center;
       gap: 12px;
       text-decoration: none;
-      color: var(--text);
+      color: var(--fg-primary);
     }
 
-    .avatar-badge {
-      width: 44px;
-      height: 44px;
+    .avatar {
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #2ea043, #1f6feb);
+      background: #1e293b;
+      border: 1px solid var(--card-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 18px;
-      color: #fff;
-    }
-
-    .brand-info h1 {
-      font-size: 18px;
       font-weight: 600;
-      letter-spacing: -0.3px;
-    }
-
-    .brand-info p {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    nav {
-      display: flex;
-      gap: 16px;
-    }
-
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.15s ease;
-      padding: 6px 12px;
-      border-radius: 6px;
-    }
-
-    nav a:hover, nav a.active {
-      color: var(--text);
-      background: var(--tag-bg);
-    }
-
-    /* 英雄区：自我介绍 */
-    .hero {
-      margin-bottom: 56px;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      background: rgba(46, 160, 67, 0.15);
-      color: var(--accent-hover);
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 500;
-      margin-bottom: 16px;
-    }
-
-    .hero-tag::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent-hover);
-    }
-
-    .hero h2 {
-      font-size: 38px;
-      line-height: 1.25;
-      font-weight: 700;
-      margin-bottom: 16px;
+      font-size: 15px;
+      color: var(--accent);
       letter-spacing: -0.5px;
     }
 
-    .hero p {
+    .brand-meta h1 {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .brand-meta p {
+      font-size: 13px;
+      color: var(--fg-muted);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #34d399;
+      background: rgba(52, 211, 153, 0.1);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #34d399;
+    }
+
+    /* 个人主展示区 Hero */
+    .hero {
+      padding: 72px 0 64px;
+      max-width: 820px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      line-height: 1.25;
+      font-weight: 700;
+      color: var(--fg-primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+      text-wrap: balance;
+    }
+
+    .hero-desc {
       font-size: 17px;
-      color: var(--text-muted);
-      max-width: 680px;
-      margin-bottom: 28px;
+      line-height: 1.75;
+      color: var(--fg-secondary);
+      margin-bottom: 32px;
     }
 
     .hero-actions {
       display: flex;
-      gap: 12px;
-      align-items: center;
       flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 500;
       text-decoration: none;
-      transition: all 0.15s ease;
-      min-height: 42px;
+      cursor: pointer;
+      transition: var(--transition);
       border: 1px solid transparent;
+      font-family: inherit;
     }
 
     .btn-primary {
-      background: var(--accent);
-      color: #fff;
+      background: var(--fg-primary);
+      color: #0b0f17;
     }
 
     .btn-primary:hover {
-      background: var(--accent-hover);
+      background: #e2e8f0;
     }
 
-    .btn-outline {
-      background: transparent;
-      border-color: var(--border);
-      color: var(--text);
+    .btn-secondary {
+      background: var(--bg-subtle);
+      color: var(--fg-secondary);
+      border-color: var(--card-border);
     }
 
-    .btn-outline:hover {
-      background: var(--tag-bg);
-      border-color: var(--text-muted);
+    .btn-secondary:hover {
+      color: var(--fg-primary);
+      border-color: var(--card-border-hover);
     }
 
-    /* 分类过滤器 */
-    .section-header {
+    /* 案例作品区 */
+    #projects {
+      padding: 48px 0 64px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .section-head {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-      gap: 16px;
+      align-items: flex-end;
+      margin-bottom: 32px;
     }
 
     .section-title {
       font-size: 22px;
       font-weight: 600;
+      color: var(--fg-primary);
     }
 
     .filters {
       display: flex;
       gap: 8px;
-      flex-wrap: wrap;
+      background: var(--bg-subtle);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
     }
 
     .filter-btn {
+      background: none;
+      border: none;
       padding: 6px 14px;
       font-size: 13px;
-      border-radius: 20px;
-      background: var(--tag-bg);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
+      color: var(--fg-muted);
       cursor: pointer;
-      transition: all 0.15s ease;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      font-family: inherit;
     }
 
     .filter-btn:hover {
-      color: var(--text);
+      color: var(--fg-primary);
     }
 
     .filter-btn.active {
-      background: var(--text);
-      color: var(--bg);
-      border-color: var(--text);
-      font-weight: 600;
+      background: var(--card-bg);
+      color: var(--fg-primary);
+      font-weight: 500;
+      border: 1px solid var(--card-border);
     }
 
     /* 作品网格 */
-    .grid {
+    .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
       margin-bottom: 64px;
     }
 
-    .card {
+    .project-card {
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: var(--transition);
       cursor: pointer;
+      text-align: left;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: #58a6ff;
+    .project-card:hover {
+      border-color: var(--card-border-hover);
+      transform: translateY(-2px);
     }
 
-    .card-preview {
+    .project-preview {
       width: 100%;
-      height: 180px;
-      background: #21262d;
+      height: 220px;
+      background: #11141a;
+      border-bottom: 1px solid var(--card-border);
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      overflow: hidden;
+      padding: 16px;
     }
 
-    .card-preview svg {
+    .preview-canvas {
       width: 100%;
       height: 100%;
+      border-radius: var(--radius-sm);
+      background: #0f1218;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    .card-body {
-      padding: 20px;
+    .preview-toolbar {
+      height: 28px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 6px;
+    }
+
+    .pdot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .preview-label {
+      margin-left: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg-muted);
+    }
+
+    .preview-body {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-content {
+      padding: 24px;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
 
-    .card-tags {
+    .project-header {
       display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
       margin-bottom: 12px;
     }
 
-    .tag {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 4px;
-      background: var(--tag-bg);
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-    }
-
-    .card-title {
-      font-size: 18px;
+    .project-name {
+      font-size: 17px;
       font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--text);
+      color: var(--fg-primary);
     }
 
-    .card-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 16px;
+    .project-year {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg-muted);
+    }
+
+    .project-summary {
+      font-size: 15px;
+      color: var(--fg-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
       flex: 1;
     }
 
-    .card-footer {
+    .project-tags {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-      color: #58a6ff;
-      font-weight: 500;
-    }
-
-    /* 技能与经验 */
-    .skills-section {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      margin-bottom: 64px;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-      margin-top: 20px;
-    }
-
-    .skill-col h4 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      color: var(--text);
-    }
-
-    .skill-list {
-      list-style: none;
-    }
-
-    .skill-list li {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
     }
 
-    .skill-list li::before {
-      content: "•";
-      color: var(--accent);
-      font-size: 16px;
+    .tag {
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--tag-bg);
+      color: var(--fg-secondary);
+      border: 1px solid var(--card-border);
     }
 
-    /* 关于我与联系 */
-    .about-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-bottom: 64px;
+    /* 经历与履历 */
+    .timeline-section {
+      padding: 48px 0 64px;
+      border-top: 1px solid var(--card-border);
     }
 
-    .about-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
-    }
-
-    .about-card h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .about-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      line-height: 1.6;
-    }
-
-    .contact-links {
+    .timeline-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 28px;
+      margin-top: 28px;
     }
 
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--text);
-      text-decoration: none;
-      padding: 10px 14px;
-      background: var(--tag-bg);
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      transition: border-color 0.15s ease;
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
+      align-items: baseline;
     }
 
-    .contact-item:hover {
-      border-color: #58a6ff;
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--fg-muted);
     }
 
-    /* 页脚与数据备份 */
+    .timeline-content h4 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--fg-primary);
+      margin-bottom: 4px;
+    }
+
+    .timeline-content .role {
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-family: var(--font-mono);
+    }
+
+    .timeline-content p {
+      font-size: 15px;
+      color: var(--fg-secondary);
+      line-height: 1.65;
+    }
+
+    /* 页脚与联系交流 */
     footer {
-      border-top: 1px solid var(--border);
-      padding-top: 28px;
+      padding: 56px 0 72px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .footer-wrap {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      color: var(--text-muted);
-      font-size: 13px;
+      align-items: flex-end;
+      gap: 32px;
     }
 
-    .footer-actions {
+    .footer-left h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .footer-left p {
+      color: var(--fg-secondary);
+      font-size: 15px;
+    }
+
+    .footer-links {
       display: flex;
-      gap: 10px;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .btn-sm {
-      padding: 6px 12px;
-      font-size: 12px;
-      min-height: auto;
+    .link-item {
+      color: var(--fg-secondary);
+      text-decoration: none;
+      font-size: 15px;
+      transition: var(--transition);
     }
 
-    /* 模态框弹窗 */
-    .modal-backdrop {
+    .link-item:hover {
+      color: var(--accent);
+    }
+
+    /* 案例详情弹窗 (Modal) */
+    .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      display: none;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
-      padding: 20px;
+      padding: 24px;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
     }
 
-    .modal-content {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      max-width: 640px;
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-dialog {
+      background: #161920;
+      border: 1px solid var(--card-border-hover);
+      border-radius: var(--radius-lg);
+      max-width: 680px;
       width: 100%;
-      padding: 28px;
-      position: relative;
-      max-height: 90vh;
+      max-height: 85vh;
       overflow-y: auto;
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      transform: translateY(12px);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.open .modal-dialog {
+      transform: translateY(0);
     }
 
     .modal-close {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 24px;
+      top: 24px;
+      right: 24px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--card-border);
+      color: var(--fg-secondary);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      line-height: 1;
+      font-size: 17px;
+      transition: var(--transition);
+      font-family: inherit;
     }
 
     .modal-close:hover {
-      color: var(--text);
+      color: var(--fg-primary);
+      border-color: var(--card-border-hover);
     }
 
-    .modal-header h3 {
+    .modal-hero {
+      margin-bottom: 24px;
+    }
+
+    .modal-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .modal-title {
       font-size: 22px;
       font-weight: 700;
-      margin-bottom: 8px;
+      color: var(--fg-primary);
+      margin-bottom: 12px;
     }
 
-    .modal-meta {
-      font-size: 13px;
-      color: var(--accent-hover);
-      margin-bottom: 16px;
-    }
-
-    .modal-body p {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-
-    .modal-highlights {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+    .modal-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      background: var(--bg-subtle);
       padding: 16px;
-      margin-bottom: 20px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 24px;
+      border: 1px solid var(--card-border);
     }
 
-    .modal-highlights h5 {
+    .meta-box h5 {
       font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-
-    .modal-highlights ul {
-      padding-left: 18px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .modal-highlights li {
+      color: var(--fg-muted);
       margin-bottom: 4px;
+      font-family: var(--font-mono);
     }
 
-    /* 移动端适配 */
-    @media (max-width: 768px) {
-      body {
-        padding: 0 16px 60px;
-      }
+    .meta-box p {
+      font-size: 15px;
+      color: var(--fg-primary);
+      font-weight: 500;
+    }
 
-      header {
+    .modal-body {
+      color: var(--fg-secondary);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .modal-body h4 {
+      color: var(--fg-primary);
+      font-size: 17px;
+      margin: 20px 0 8px;
+    }
+
+    .modal-body ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    /* Toast 状态提示 */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #f8fafc;
+      color: #0f172a;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.25s ease;
+      z-index: 200;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* 响应式断点 */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 48px 0 40px;
+      }
+      .hero-title {
+        font-size: 34px;
+      }
+      .section-title {
+        font-size: 22px;
+      }
+      .hero-desc {
+        font-size: 15px;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      .section-head {
         flex-direction: column;
         align-items: flex-start;
         gap: 16px;
-        margin-bottom: 32px;
       }
-
-      .hero h2 {
-        font-size: 28px;
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
       }
-
-      .hero p {
-        font-size: 15px;
-      }
-
-      .about-section {
+      .modal-meta-grid {
         grid-template-columns: 1fr;
       }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      footer {
+      .footer-wrap {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -558,456 +647,471 @@
   </style>
 </head>
 <body>
+
   <div class="container">
-    <!-- 头部导航 -->
+    <!-- 顶部导航 -->
     <header>
       <a href="#" class="brand">
-        <div class="avatar-badge">A</div>
-        <div class="brand-info">
-          <h1>Alex Chen</h1>
-          <p>Product Designer & Frontend Engineer</p>
+        <div class="avatar">CM</div>
+        <div class="brand-meta">
+          <h1>晨墨 · Chen Mo</h1>
+          <p>Product Designer & Full-stack Engineer</p>
         </div>
       </a>
-      <nav>
-        <a href="#projects" class="active">作品</a>
-        <a href="#skills">技能栈</a>
-        <a href="#about">关于我</a>
-        <a href="#contact">联系</a>
-      </nav>
+      <div>
+        <span class="status-pill">
+          <span class="status-dot"></span>
+          开放项目合作
+        </span>
+      </div>
     </header>
 
-    <!-- 主介绍区 -->
+    <!-- 个人主展示 Hero -->
     <section class="hero">
-      <div class="hero-tag">开放接案 & 交流中</div>
-      <h2>用克制而实用的设计，<br>打造真正解决问题的好产品。</h2>
-      <p>你好，我是 Alex。5 年数字化界面与全栈 Web 开发经验，关注清晰的信息层级、扎实的交互体验与经久耐看的极简美学。</p>
+      <div class="hero-eyebrow">DESIGN &amp; CODE FOR COGNITIVE EASE</div>
+      <h2 class="hero-title">连接严谨的软件工程与直觉化的交互设计</h2>
+      <p class="hero-desc">
+        拥有 6 年全栈研发与数字产品设计实践经验。专注于独立开发、图形计算工具与企业级复杂系统体验重构。追求清晰的信息架构与顺滑的实时交互，致力于交付可靠、易懂且有温度的数字产品。
+      </p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">浏览代表作品</a>
-        <a href="#contact" class="btn btn-outline">获取联系方式</a>
+        <a href="#projects" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+          浏览精选作品
+        </a>
+        <button class="btn btn-secondary" onclick="copyContact()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          复制联系邮箱
+        </button>
+        <button class="btn btn-secondary" onclick="exportPortfolioJSON()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          导出作品清单
+        </button>
       </div>
     </section>
 
-    <!-- 作品展示列表 -->
+    <!-- 核心作品区 -->
     <section id="projects">
-      <div class="section-header">
-        <h3 class="section-title">精选作品集</h3>
-        <div class="filters" id="filter-container">
-          <button class="filter-btn active" data-filter="all">全部 (6)</button>
-          <button class="filter-btn" data-filter="web">Web 应用</button>
-          <button class="filter-btn" data-filter="tool">效率工具</button>
-          <button class="filter-btn" data-filter="design">界面设计</button>
+      <div class="section-head">
+        <div>
+          <h3 class="section-title">精选实践案例</h3>
+        </div>
+        <div class="filters">
+          <button class="filter-btn active" onclick="filterProjects('all', this)">全部案例</button>
+          <button class="filter-btn" onclick="filterProjects('product', this)">工具产品</button>
+          <button class="filter-btn" onclick="filterProjects('engineering', this)">底层工程</button>
+          <button class="filter-btn" onclick="filterProjects('interaction', this)">交互设计</button>
         </div>
       </div>
 
-      <div class="grid" id="project-grid">
-        <!-- 卡片 1 -->
-        <div class="card" data-category="web" data-id="1">
-          <div class="card-preview">
-            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
-              <rect width="360" height="180" fill="#161b22"/>
-              <rect x="20" y="24" width="320" height="132" rx="8" fill="#1c2128" stroke="#30363d"/>
-              <circle cx="40" cy="40" r="4" fill="#f85149"/>
-              <circle cx="52" cy="40" r="4" fill="#e3b341"/>
-              <circle cx="64" cy="40" r="4" fill="#2ea043"/>
-              <rect x="40" y="58" width="120" height="12" rx="3" fill="#30363d"/>
-              <rect x="40" y="78" width="260" height="8" rx="2" fill="#21262d"/>
-              <rect x="40" y="94" width="220" height="8" rx="2" fill="#21262d"/>
-              <rect x="40" y="118" width="80" height="20" rx="4" fill="#238636"/>
-            </svg>
+      <div class="projects-grid" id="projectsContainer">
+        <!-- 项目 1 -->
+        <article class="project-card" data-category="product" onclick="openCaseStudy(0)">
+          <div class="project-preview">
+            <div class="preview-canvas">
+              <div class="preview-toolbar">
+                <span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+                <span class="preview-label">canvas.render // node-graph</span>
+              </div>
+              <div class="preview-body">
+                <svg width="100%" height="100%" viewBox="0 0 340 140" style="padding: 12px;">
+                  <defs>
+                    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#38bdf8" />
+                      <stop offset="100%" stop-color="#818cf8" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="20" y="45" width="80" height="36" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
+                  <text x="32" y="68" fill="#f8fafc" font-size="13" font-family="ui-monospace, monospace">Input.Trigger</text>
+                  <rect x="230" y="20" width="85" height="36" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1.5" />
+                  <text x="242" y="43" fill="#cbd5e1" font-size="13" font-family="ui-monospace, monospace">Output.Sink</text>
+                  <rect x="230" y="80" width="85" height="36" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
+                  <text x="242" y="103" fill="#38bdf8" font-size="13" font-family="ui-monospace, monospace">Shader.WebGL</text>
+                  <path d="M 100 63 C 160 63, 170 38, 230 38" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" />
+                  <path d="M 100 63 C 160 63, 170 98, 230 98" fill="none" stroke="url(#g1)" stroke-width="2" />
+                  <circle cx="100" cy="63" r="3.5" fill="#38bdf8" />
+                  <circle cx="230" cy="98" r="3.5" fill="#38bdf8" />
+                </svg>
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <div class="card-tags">
+          <div class="project-content">
+            <div class="project-header">
+              <h4 class="project-name">FlowCraft · 视觉化逻辑编排画布</h4>
+              <span class="project-year">2026</span>
+            </div>
+            <p class="project-summary">基于 WebGL 与 Canvas 渲染的高性能无代码逻辑构建器，支撑万级节点在低配设备保持 60fps 顺滑平移与缩放。</p>
+            <div class="project-tags">
               <span class="tag">TypeScript</span>
-              <span class="tag">Next.js</span>
-              <span class="tag">Web 应用</span>
+              <span class="tag">Canvas/WebGL</span>
+              <span class="tag">交互设计</span>
+              <span class="tag">状态机</span>
             </div>
-            <h4 class="card-title">FlowPulse 团队实时协同面板</h4>
-            <p class="card-desc">轻量级敏捷看板与里程碑追踪系统，支持毫秒级状态同步、无损离线编辑与看板图表导出。</p>
-            <div class="card-footer">
-              <span>查看项目详情</span>
-              <span>→</span>
+          </div>
+        </article>
+
+        <!-- 项目 2 -->
+        <article class="project-card" data-category="engineering" onclick="openCaseStudy(1)">
+          <div class="project-preview">
+            <div class="preview-canvas">
+              <div class="preview-toolbar">
+                <span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+                <span class="preview-label">raft.consensus // cluster-status</span>
+              </div>
+              <div class="preview-body">
+                <svg width="100%" height="100%" viewBox="0 0 340 140" style="padding: 12px;">
+                  <circle cx="70" cy="70" r="28" fill="#1e293b" stroke="#fb923c" stroke-width="2" />
+                  <text x="48" y="68" fill="#fb923c" font-size="13" font-weight="600" font-family="ui-monospace, monospace">LEADER</text>
+                  <text x="50" y="82" fill="#94a3b8" font-size="13" font-family="ui-monospace, monospace">Node-01</text>
+                  <circle cx="180" cy="40" r="20" fill="#1e293b" stroke="#64748b" stroke-width="1.5" />
+                  <text x="162" y="44" fill="#cbd5e1" font-size="13" font-family="ui-monospace, monospace">Node-02</text>
+                  <circle cx="180" cy="100" r="20" fill="#1e293b" stroke="#64748b" stroke-width="1.5" />
+                  <text x="162" y="104" fill="#cbd5e1" font-size="13" font-family="ui-monospace, monospace">Node-03</text>
+                  <line x1="98" y1="62" x2="160" y2="46" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="4,2" />
+                  <line x1="98" y1="78" x2="160" y2="94" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="4,2" />
+                  <rect x="235" y="42" width="85" height="56" rx="4" fill="#14171d" stroke="rgba(255,255,255,0.08)" />
+                  <text x="245" y="60" fill="#38bdf8" font-size="13" font-family="ui-monospace, monospace">IOPS: 140k</text>
+                  <text x="245" y="74" fill="#34d399" font-size="13" font-family="ui-monospace, monospace">p99: 0.8ms</text>
+                  <text x="245" y="88" fill="#94a3b8" font-size="13" font-family="ui-monospace, monospace">Sync: OK</text>
+                </svg>
+              </div>
             </div>
+          </div>
+          <div class="project-content">
+            <div class="project-header">
+              <h4 class="project-name">HyperKV · 轻量分布式嵌入式缓存</h4>
+              <span class="project-year">2025</span>
+            </div>
+            <p class="project-summary">零第三方依赖的内存键值引擎，支持 Raft 共识与自动日志压缩，被 30+ 团队用于边缘网关状态快照同步。</p>
+            <div class="project-tags">
+              <span class="tag">Go</span>
+              <span class="tag">Raft协议</span>
+              <span class="tag">分布式系统</span>
+              <span class="tag">高并发</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 项目 3 -->
+        <article class="project-card" data-category="product" onclick="openCaseStudy(2)">
+          <div class="project-preview">
+            <div class="preview-canvas">
+              <div class="preview-toolbar">
+                <span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+                <span class="preview-label">datalens.engine // aggregation</span>
+              </div>
+              <div class="preview-body">
+                <svg width="100%" height="100%" viewBox="0 0 340 140" style="padding: 14px;">
+                  <rect x="30" y="85" width="22" height="35" rx="3" fill="#38bdf8" />
+                  <rect x="65" y="65" width="22" height="55" rx="3" fill="#38bdf8" />
+                  <rect x="100" y="45" width="22" height="75" rx="3" fill="#34d399" />
+                  <rect x="135" y="70" width="22" height="50" rx="3" fill="#38bdf8" />
+                  <rect x="170" y="30" width="22" height="90" rx="3" fill="#34d399" />
+                  <rect x="205" y="55" width="22" height="65" rx="3" fill="#38bdf8" />
+                  <line x1="20" y1="120" x2="310" y2="120" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                  <path d="M 41 80 Q 111 35 181 25 T 300 70" fill="none" stroke="#f8fafc" stroke-width="2" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-header">
+              <h4 class="project-name">DataLens · 极简本地指标透视套件</h4>
+              <span class="project-year">2025</span>
+            </div>
+            <p class="project-summary">隐私优先的个人与小微业务分析桌面应用，支持拖拽百兆 CSV 即时秒级聚合运算并导出可直接呈现的精美报表。</p>
+            <div class="project-tags">
+              <span class="tag">Tauri/Rust</span>
+              <span class="tag">DuckDB</span>
+              <span class="tag">数据可视化</span>
+              <span class="tag">离线优先</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 项目 4 -->
+        <article class="project-card" data-category="interaction" onclick="openCaseStudy(3)">
+          <div class="project-preview">
+            <div class="preview-canvas">
+              <div class="preview-toolbar">
+                <span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+                <span class="preview-label">typogrid.baseline // cjk-metrics</span>
+              </div>
+              <div class="preview-body">
+                <svg width="100%" height="100%" viewBox="0 0 340 140" style="padding: 12px;">
+                  <line x1="20" y1="45" x2="320" y2="45" stroke="#64748b" stroke-width="1" stroke-dasharray="2,3" />
+                  <line x1="20" y1="75" x2="320" y2="75" stroke="#f43f5e" stroke-width="1.5" />
+                  <line x1="20" y1="105" x2="320" y2="105" stroke="#38bdf8" stroke-width="1" stroke-dasharray="2,3" />
+                  <text x="40" y="75" fill="#f8fafc" font-size="28" font-weight="700">Aa 中</text>
+                  <text x="180" y="44" fill="#94a3b8" font-size="13" font-family="ui-monospace, monospace">Cap-Height: 720</text>
+                  <text x="180" y="74" fill="#f43f5e" font-size="13" font-family="ui-monospace, monospace">Baseline: 0</text>
+                  <text x="180" y="104" fill="#38bdf8" font-size="13" font-family="ui-monospace, monospace">Descender: -240</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-header">
+              <h4 class="project-name">TypoGrid · 多源字体对比与排版工作台</h4>
+              <span class="project-year">2024</span>
+            </div>
+            <p class="project-summary">专为中西文混排设计师构建的在线排版调试工具，提供精准高倍率标尺、基线网格对齐与全尺寸实时打印预览导出。</p>
+            <div class="project-tags">
+              <span class="tag">CSS Grid</span>
+              <span class="tag">排版算法</span>
+              <span class="tag">OpenType API</span>
+              <span class="tag">Web工具</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 经历与履历 -->
+    <section class="timeline-section">
+      <h3 class="section-title">经历与背景</h3>
+      <div class="timeline-list">
+        <div class="timeline-item">
+          <div class="timeline-date">2023 — 至今</div>
+          <div class="timeline-content">
+            <h4>独立数字产品研发与咨询顾问</h4>
+            <div class="role">Founder &amp; Consultant</div>
+            <p>为国内外成长期科技团队提供交互原型重塑、前端工程化重构与设计系统落地服务。已主导 4 款 SaaS 产品的从 0 到 1 落地。</p>
           </div>
         </div>
 
-        <!-- 卡片 2 -->
-        <div class="card" data-category="tool" data-id="2">
-          <div class="card-preview">
-            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
-              <rect width="360" height="180" fill="#131920"/>
-              <rect x="30" y="30" width="140" height="120" rx="8" fill="#1c2128" stroke="#30363d"/>
-              <rect x="190" y="30" width="140" height="120" rx="8" fill="#1c2128" stroke="#30363d"/>
-              <rect x="46" y="50" width="108" height="8" rx="2" fill="#58a6ff"/>
-              <rect x="46" y="68" width="80" height="6" rx="2" fill="#8b949e"/>
-              <rect x="206" y="50" width="108" height="8" rx="2" fill="#2ea043"/>
-              <rect x="206" y="68" width="90" height="6" rx="2" fill="#8b949e"/>
-              <path d="M170 90 L190 90" stroke="#58a6ff" stroke-width="2" stroke-dasharray="4"/>
-            </svg>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag">Node.js</span>
-              <span class="tag">CLI</span>
-              <span class="tag">效率工具</span>
-            </div>
-            <h4 class="card-title">FastAsset 静态资源自动化压制工具</h4>
-            <p class="card-desc">面向前端构建流水线的资源优化引擎，一键转码 WebP/AVIF，节省 65% CDN 带宽开销。</p>
-            <div class="card-footer">
-              <span>查看项目详情</span>
-              <span>→</span>
-            </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2021 — 2023</div>
+          <div class="timeline-content">
+            <h4>Senior Frontend &amp; Interaction Engineer</h4>
+            <div class="role">字节跳动 / 商业化架构组</div>
+            <p>负责复杂数据看板与组件库核心开发，主导中后台 Design Token 标准落地，将多套独立业务线的页面渲染性能提升 42%。</p>
           </div>
         </div>
 
-        <!-- 卡片 3 -->
-        <div class="card" data-category="design" data-id="3">
-          <div class="card-preview">
-            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
-              <rect width="360" height="180" fill="#161b22"/>
-              <circle cx="100" cy="90" r="45" fill="none" stroke="#a371f7" stroke-width="12" stroke-dasharray="200" stroke-dashoffset="60"/>
-              <circle cx="100" cy="90" r="45" fill="none" stroke="#2ea043" stroke-width="12" stroke-dasharray="200" stroke-dashoffset="140"/>
-              <rect x="180" y="55" width="120" height="10" rx="3" fill="#f0f6fc"/>
-              <rect x="180" y="75" width="140" height="8" rx="2" fill="#8b949e"/>
-              <rect x="180" y="93" width="90" height="8" rx="2" fill="#8b949e"/>
-              <rect x="180" y="115" width="110" height="18" rx="4" fill="#21262d" stroke="#30363d"/>
-            </svg>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag">Figma</span>
-              <span class="tag">Design System</span>
-              <span class="tag">界面设计</span>
-            </div>
-            <h4 class="card-title">Aether 极简设计资产规范库</h4>
-            <p class="card-desc">包含 48+ 常用组件、双色系无障碍高对比度调色盘与完整排版网格系统的 Figma 开源设计规范。</p>
-            <div class="card-footer">
-              <span>查看项目详情</span>
-              <span>→</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 卡片 4 -->
-        <div class="card" data-category="web" data-id="4">
-          <div class="card-preview">
-            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
-              <rect width="360" height="180" fill="#0e141b"/>
-              <path d="M40 130 Q 110 60, 180 110 T 320 50" fill="none" stroke="#58a6ff" stroke-width="3"/>
-              <circle cx="180" cy="110" r="4" fill="#58a6ff"/>
-              <circle cx="320" cy="50" r="4" fill="#2ea043"/>
-              <line x1="40" y1="140" x2="320" y2="140" stroke="#30363d" stroke-width="1"/>
-            </svg>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag">Vue 3</span>
-              <span class="tag">Canvas</span>
-              <span class="tag">Web 应用</span>
-            </div>
-            <h4 class="card-title">ApexAnalytics 数据可视化仪表盘</h4>
-            <p class="card-desc">高性能时间序列数据监控面板，支持单屏流畅渲染超 10 万点实时遥测指标曲线。</p>
-            <div class="card-footer">
-              <span>查看项目详情</span>
-              <span>→</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 卡片 5 -->
-        <div class="card" data-category="tool" data-id="5">
-          <div class="card-preview">
-            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
-              <rect width="360" height="180" fill="#161b22"/>
-              <rect x="40" y="35" width="280" height="110" rx="8" fill="#1c2128" stroke="#30363d"/>
-              <text x="60" y="70" font-family="monospace" font-size="13" fill="#7ee787">$ note new --encrypt</text>
-              <text x="60" y="95" font-family="monospace" font-size="13" fill="#8b949e">> Vault unlocked: 12 notes</text>
-              <rect x="60" y="112" width="12" height="15" fill="#58a6ff"/>
-            </svg>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag">Rust</span>
-              <span class="tag">Markdown</span>
-              <span class="tag">效率工具</span>
-            </div>
-            <h4 class="card-title">KeyMemo 本地端到端加密笔记</h4>
-            <p class="card-desc">纯本地存储的极客个人便签工具，采用 AES-256-GCM 加密算法，无云端泄露隐患。</p>
-            <div class="card-footer">
-              <span>查看项目详情</span>
-              <span>→</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 卡片 6 -->
-        <div class="card" data-category="design" data-id="6">
-          <div class="card-preview">
-            <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
-              <rect width="360" height="180" fill="#181e24"/>
-              <rect x="50" y="25" width="100" height="130" rx="12" fill="#1c2128" stroke="#30363d"/>
-              <rect x="180" y="25" width="130" height="130" rx="8" fill="#1c2128" stroke="#30363d"/>
-              <circle cx="100" cy="60" r="16" fill="#f0883e"/>
-              <rect x="65" y="90" width="70" height="8" rx="2" fill="#f0f6fc"/>
-              <rect x="195" y="45" width="100" height="8" rx="2" fill="#2ea043"/>
-              <rect x="195" y="65" width="80" height="6" rx="2" fill="#8b949e"/>
-            </svg>
-          </div>
-          <div class="card-body">
-            <div class="card-tags">
-              <span class="tag">Mobile UI</span>
-              <span class="tag">Design</span>
-              <span class="tag">界面设计</span>
-            </div>
-            <h4 class="card-title">ZenHabit 习惯打卡移动端概念设计</h4>
-            <p class="card-desc">去除冗余成就系统的极简打卡交互方案，通过温柔的微交互鼓励用户培养专注的生活节奏。</p>
-            <div class="card-footer">
-              <span>查看项目详情</span>
-              <span>→</span>
-            </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2019 — 2021</div>
+          <div class="timeline-content">
+            <h4>Full-stack Designer &amp; Developer</h4>
+            <div class="role">星火创想科技</div>
+            <p>主导跨端协作桌面客户端核心界面开发，与团队共同获得当年国内交互设计创新奖。</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 技能栈与工作原则 -->
-    <section id="skills" class="skills-section">
-      <h3 class="section-title">核心技能与技术栈</h3>
-      <div class="skills-grid">
-        <div class="skill-col">
-          <h4>界面与前端架构</h4>
-          <ul class="skill-list">
-            <li>HTML5 / 现代 CSS 变量规范</li>
-            <li>TypeScript / JavaScript (ESNext)</li>
-            <li>React / Next.js / Vue 3</li>
-            <li>响应式栅格 & 无障碍规范 (WCAG)</li>
-          </ul>
-        </div>
-        <div class="skill-col">
-          <h4>工程与后端能力</h4>
-          <ul class="skill-list">
-            <li>Node.js / Python 自动化脚本</li>
-            <li>RESTful API 设计与轻量后端</li>
-            <li>Git 协同管理与 CI/CD 构建流</li>
-            <li>离线优先设计与 LocalStorage 存储</li>
-          </ul>
-        </div>
-        <div class="skill-col">
-          <h4>设计理念与工具</h4>
-          <ul class="skill-list">
-            <li>Figma 组件库与设计系统沉淀</li>
-            <li>信息架构提炼与大白话文案打磨</li>
-            <li>微交互动效节奏（150-250ms）</li>
-            <li>性能感知优化与首屏秒开体验</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- 关于我与联系方式 -->
-    <section id="about" class="about-section">
-      <div class="about-card">
-        <h3>关于我</h3>
-        <p>我是一名相信「好工具应当无声润物」的独立开发者与界面设计师。在复杂工程与直觉体验之间，我更倾向于做减法：去掉无意义的装饰，保留最清晰的骨架与最顺手的功能。</p>
-        <p>业余时间喜欢摄影、骑行以及折腾开源小工具。随时欢迎探讨有趣的 Web 创意或项目合作！</p>
-      </div>
-
-      <div class="about-card" id="contact">
-        <h3>联系方式</h3>
-        <p>如果你有新奇的产品想法，或者想探讨合作，可以通过以下方式找到我：</p>
-        <div class="contact-links">
-          <a href="mailto:alex.chen.dev@example.com" class="contact-item">
-            <span>📧</span>
-            <span>alex.chen.dev@example.com</span>
-          </a>
-          <a href="https://github.com" target="_blank" rel="noopener" class="contact-item">
-            <span>🐙</span>
-            <span>GitHub / alex-chen</span>
-          </a>
-          <div class="contact-item">
-            <span>💬</span>
-            <span>微信：AlexChen_Dev</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 页脚与功能 -->
+    <!-- 页脚与联系交流 -->
     <footer>
-      <div>
-        <p>© 2026 Alex Chen · 纯手工打造，支持纯静态离线运行</p>
-      </div>
-      <div class="footer-actions">
-        <button class="btn btn-outline btn-sm" id="btn-export">导出数据备份 (.json)</button>
-        <button class="btn btn-outline btn-sm" id="btn-totop">回到顶部 ↑</button>
+      <div class="footer-wrap">
+        <div class="footer-left">
+          <h3>随时交流或讨论新项目想法</h3>
+          <p>欢迎发送邮件或通过常用社交平台与我取得联系，通常在 24 小时内回复。</p>
+        </div>
+        <div class="footer-links">
+          <a href="javascript:void(0)" onclick="copyContact()" class="link-item">chenmo.studio@outlook.com</a>
+          <a href="https://github.com" target="_blank" rel="noreferrer" class="link-item">GitHub</a>
+          <a href="https://x.com" target="_blank" rel="noreferrer" class="link-item">X (Twitter)</a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="link-item">LinkedIn</a>
+        </div>
       </div>
     </footer>
   </div>
 
-  <!-- 详情弹窗模态框 -->
-  <div class="modal-backdrop" id="modal">
-    <div class="modal-content">
-      <button class="modal-close" id="modal-close" aria-label="关闭">&times;</button>
-      <div class="modal-header">
-        <h3 id="modal-title">项目详情</h3>
-        <div class="modal-meta" id="modal-category">分类标签</div>
+  <!-- 案例详情弹窗 (Modal) -->
+  <div class="modal-overlay" id="caseModal" onclick="closeModalOnBg(event)">
+    <div class="modal-dialog">
+      <button class="modal-close" onclick="closeModal()" aria-label="关闭">✕</button>
+      <div class="modal-hero">
+        <div class="modal-eyebrow" id="modalEyebrow">CASE STUDY</div>
+        <h3 class="modal-title" id="modalTitle">项目名称</h3>
       </div>
-      <div class="modal-body">
-        <p id="modal-desc">项目描述内容...</p>
-        <div class="modal-highlights">
-          <h5>设计与工程亮点</h5>
-          <ul id="modal-points">
-            <li>采用纯 CSS 变量实现暗色主题，减少不必要的外部重绘</li>
-            <li>移动端视口与无障碍对比度经严谨核对</li>
-          </ul>
+      <div class="modal-meta-grid">
+        <div class="meta-box">
+          <h5>角色职责</h5>
+          <p id="modalRole">主导设计 &amp; 全栈研发</p>
+        </div>
+        <div class="meta-box">
+          <h5>交付周期</h5>
+          <p id="modalDuration">4 个月</p>
+        </div>
+        <div class="meta-box">
+          <h5>关键指标</h5>
+          <p id="modalImpact">渲染延迟 &lt; 16ms</p>
         </div>
       </div>
-      <div style="text-align: right;">
-        <button class="btn btn-primary btn-sm" id="modal-ok">了解并关闭</button>
+      <div class="modal-body" id="modalBody">
+        <!-- 动态详情内容填充 -->
       </div>
     </div>
   </div>
 
-  <!-- 交互逻辑 -->
+  <!-- Toast 提示 -->
+  <div class="toast" id="toastMessage">已成功复制邮箱到剪贴板</div>
+
   <script>
-    // 项目数据定义
-    const projectsData = {
-      1: {
-        title: "FlowPulse 团队实时协同面板",
-        category: "Web 应用 · TypeScript / Next.js",
-        desc: "针对 5-20 人敏捷团队设计的精简协同工具。抛弃传统看板臃肿的配置流程，以任务流转卡片与即时评论为核心，首屏加载包体积仅 42KB。",
-        points: [
-          "基于 WebSocket 的毫秒级状态同步协议",
-          "支持拖拽排序与离线暂存（网络中断时不丢数据）",
-          "内置甘特图与周报一键导出为 Markdown / PNG"
-        ]
+    // 案例数据
+    const caseStudies = [
+      {
+        title: "FlowCraft · 视觉化逻辑编排画布",
+        eyebrow: "WEBGL & CANVAS 性能工程实践",
+        role: "核心架构与交互设计",
+        duration: "5 个月",
+        impact: "支撑 10,000+ 节点 60fps 运行",
+        content: `
+          <h4>项目背景与挑战</h4>
+          <p>在复杂的工业控制与低代码逻辑构建中，传统的 DOM 树节点方案在超过 300 个复杂连线时会出现明显的卡顿与掉帧。FlowCraft 从底层重写了视口裁剪与分块渲染逻辑。</p>
+          <h4>核心设计与技术解法</h4>
+          <ul>
+            <li><strong>视口自适应分块算法</strong>：仅针对用户可见视窗范围进行真实拓扑求值与顶点缓冲装载，不可见节点直接降级为内存元数据。</li>
+            <li><strong>贝塞尔连线吸附热区优化</strong>：重构了连线碰撞检测逻辑，将鼠标吸附判断开销由 O(N) 降低至基于四叉树索引的 O(log N)。</li>
+            <li><strong>无状态撤销重做栈</strong>：利用 Command 模式与快照 diff 机制，历史栈内存占用控制在 15MB 以内。</li>
+          </ul>
+          <h4>项目成果</h4>
+          <p>成功整合入 2 个内部商业系统，页面首屏加载时间缩短 60%，用户复杂操作误触率下降 75%。</p>
+        `
       },
-      2: {
-        title: "FastAsset 静态资源自动化压制工具",
-        category: "效率工具 · Node.js / CLI",
-        desc: "开发 FastAsset 旨在解决团队每次发布版本时图片资源过大导致的加载慢问题。通过集成先进编码器，能够在保持视觉无损的前提下大幅缩减体积。",
-        points: [
-          "自动识别 PNG / JPEG 并并行编码为现代 WebP 与 AVIF",
-          "多进程流式写入，处理 100 张高清大图仅需 4.2 秒",
-          "提供清晰的压缩比率报告，已在 3 个开源项目中落地"
-        ]
+      {
+        title: "HyperKV · 轻量分布式嵌入式缓存",
+        eyebrow: "DISTRIBUTED CONSENSUS ENGINE",
+        role: "独立设计与架构研发",
+        duration: "3 个月",
+        impact: "单节点读写 p99 < 0.8ms",
+        content: `
+          <h4>设计理念与目标</h4>
+          <p>针对边缘网关设备内存苛刻（通常小于 256MB）且网络环境容易分区的痛点，研发一套轻量、高自愈能力的 Raft 状态机实现。</p>
+          <h4>关键技术突破</h4>
+          <ul>
+            <li><strong>零 GC 友好缓冲区</strong>：利用基于环形缓冲的 slab 内存池分配机制，大幅减少 Go runtime 的 GC pause 抖动。</li>
+            <li><strong>自适应心跳租约</strong>：根据网络抖动方差动态调整 Election Timeout，避免弱网假死触发的无效 Leader 选举。</li>
+            <li><strong>流式日志压缩 Snapshot</strong>：在不阻塞主写入线程的情况下完成持久化镜像落盘。</li>
+          </ul>
+        `
       },
-      3: {
-        title: "Aether 极简设计资产规范库",
-        category: "界面设计 · Figma / Design System",
-        desc: "一套注重阅读节奏与对比度规范的 Figma UI Kit。整套资产围绕「克制、清晰、一套到底」的原则构建，杜绝多余的渐变与框套框设计。",
-        points: [
-          "严格统一 8px / 12px 圆角阶梯与标准文字阶梯",
-          "经过 WCAG AA 级色彩对比度审查（对比度 ≥ 4.5:1）",
-          "附带全套线性 SVG 图标与响应式导航模板"
-        ]
+      {
+        title: "DataLens · 极简本地指标透视套件",
+        eyebrow: "PRIVACY-FIRST DESKTOP DATA TOOL",
+        role: "产品构思、UI设计与桌面端研发",
+        duration: "4 个月",
+        impact: "支持 100MB+ CSV 秒级分析",
+        content: `
+          <h4>让非技术人员也能享受即时数据透视</h4>
+          <p>传统专业 BI 工具安装沉重、需要上传云端，而普通 Excel 处理超大数据容易无响应。DataLens 坚持「数据不出本地设备」的原则。</p>
+          <h4>设计与架构亮点</h4>
+          <ul>
+            <li><strong>Tauri + DuckDB 内嵌架构</strong>：利用列式数据库的高性能聚合计算引擎，包体积压缩至 12MB 以内。</li>
+            <li><strong>无配置即时可视化推断</strong>：分析用户拖入的字段类型，自动推荐最合适的轴映射与分布图表。</li>
+            <li><strong>所见即所得图表导出</strong>：一键生成矢量 SVG 与适合分享到微信、邮件的高清透明 PNG。</li>
+          </ul>
+        `
       },
-      4: {
-        title: "ApexAnalytics 数据可视化仪表盘",
-        category: "Web 应用 · Vue 3 / Canvas",
-        desc: "针对高频时序数据量身定制的轻量前端监控看板，重点攻克了大量 DOM 节点在低配设备上渲染卡顿的技术瓶颈。",
-        points: [
-          "自研双缓冲 Canvas 折线引擎，10 万点平滑缩放无掉帧",
-          "提供暗色/高对比度适配，暗光环境下护眼易读",
-          "支持指标预警阈值实时闪烁提醒与数据切片导出"
-        ]
-      },
-      5: {
-        title: "KeyMemo 本地端到端加密笔记",
-        category: "效率工具 · Rust / Markdown",
-        desc: "零云端依赖的个人敏感信息便签本。数据完全保存在本地磁盘并进行高强度对称加密，任何第三方服务均无法嗅探明文内容。",
-        points: [
-          "采用 AES-256-GCM 硬件加速加密方案",
-          "内存中敏感字段使用安全覆写技术，防止休眠后转储泄露",
-          "极简 CLI + Web 简易双模式自由切换"
-        ]
-      },
-      6: {
-        title: "ZenHabit 习惯打卡移动端概念设计",
-        category: "界面设计 · Mobile UI / Figma",
-        desc: "反向对抗「游戏化疲劳」的极简习惯养成应用。去除了排行榜与繁复勋章，回归纯粹的日历热力点与简单的心情标注。",
-        points: [
-          "专注单手微操作体验，所有触发点置于拇指舒适区",
-          "温润自然的微交互，无任何突兀弹窗打扰",
-          "深受小众极简主义爱好者的好评"
-        ]
+      {
+        title: "TypoGrid · 多源字体对比与排版工作台",
+        eyebrow: "PRECISION TYPOGRAPHY EXPERIMENT",
+        role: "排版算法与前端交互开发",
+        duration: "2 个月",
+        impact: "被多家独立设计工作室推荐使用",
+        content: `
+          <h4>排版不仅是字号，更是网格与节奏</h4>
+          <p>中文字符与西文在基线（Baseline）、大写高度（Cap-Height）及降部（Descender）上常有微妙的度量差异。TypoGrid 为设计师提供亚像素级的度量标尺。</p>
+          <h4>核心能力</h4>
+          <ul>
+            <li><strong>OpenType 字体度量解析</strong>：直接在前端解析字体文件的 Hhea/OS2 表，还原真实的字形度量。</li>
+            <li><strong>双向排版对比联动</strong>：支持两侧分屏滚动比对段落灰度与行宽节奏。</li>
+            <li><strong>一键生成生产级 CSS Token</strong>：导出可直接拷贝进前端项目的 clamp() 响应式字号计算规则。</li>
+          </ul>
+        `
       }
-    };
+    ];
 
-    // 过滤分类切换
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.card');
+    // 分类筛选
+    function filterProjects(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.getAttribute('data-filter');
-
-        cards.forEach(card => {
-          if (filter === 'all' || card.getAttribute('data-category') === filter) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // 弹窗逻辑
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalCategory = document.getElementById('modal-category');
-    const modalDesc = document.getElementById('modal-desc');
-    const modalPoints = document.getElementById('modal-points');
-    const modalClose = document.getElementById('modal-close');
-    const modalOk = document.getElementById('modal-ok');
-
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        const id = card.getAttribute('data-id');
-        const data = projectsData[id];
-        if (data) {
-          modalTitle.textContent = data.title;
-          modalCategory.textContent = data.category;
-          modalDesc.textContent = data.desc;
-          modalPoints.innerHTML = data.points.map(p => `<li>${p}</li>`).join('');
-          modal.style.display = 'flex';
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
         }
       });
-    });
-
-    function closeModal() {
-      modal.style.display = 'none';
     }
 
-    modalClose.addEventListener('click', closeModal);
-    modalOk.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
+    // 复制联系方式
+    function copyContact() {
+      const email = "chenmo.studio@outlook.com";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(showToast);
+      } else {
+        const input = document.createElement("input");
+        input.value = email;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+        showToast();
+      }
+    }
 
-    // 回到顶部
-    document.getElementById('btn-totop').addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    // 导出作品集备份 JSON
+    function exportPortfolioJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(caseStudies, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "chenmo-portfolio-data.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      
+      const toast = document.getElementById('toastMessage');
+      toast.textContent = "已成功导出作品集 JSON 数据备份";
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+        toast.textContent = "已成功复制邮箱到剪贴板";
+      }, 2500);
+    }
 
-    // 导出备份（满足数据存本地、能导出备份规范）
-    document.getElementById('btn-export').addEventListener('click', () => {
-      const backupData = {
-        author: "Alex Chen",
-        version: "1.0.0",
-        exportedAt: new Date().toISOString(),
-        projects: projectsData
-      };
-      const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `alex-portfolio-backup-${new Date().toISOString().slice(0, 10)}.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+    function showToast() {
+      const toast = document.getElementById('toastMessage');
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // 弹窗控制
+    function openCaseStudy(index) {
+      const item = caseStudies[index];
+      if (!item) return;
+
+      document.getElementById('modalTitle').textContent = item.title;
+      document.getElementById('modalEyebrow').textContent = item.eyebrow;
+      document.getElementById('modalRole').textContent = item.role;
+      document.getElementById('modalDuration').textContent = item.duration;
+      document.getElementById('modalImpact').textContent = item.impact;
+      document.getElementById('modalBody').innerHTML = item.content;
+
+      const modal = document.getElementById('caseModal');
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('caseModal');
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOnBg(e) {
+      if (e.target.id === 'caseModal') {
+        closeModal();
+      }
+    }
+
+    // 键盘 Esc 键支持
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
     });
   </script>
 </body>
